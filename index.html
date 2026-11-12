@@ -155,7 +155,10 @@
       .copyright { margin-top: 38px; }
     }
     @media (max-width: 360px) { .login-panel { padding-inline: 20px; } }
-  </style>
+  
+@media (min-width:761px){body{min-height:100dvh;height:100dvh;padding:10px;overflow:hidden}.shell{height:min(680px,calc(100dvh - 20px));min-height:0}.login-panel{padding-top:clamp(18px,3vh,32px);padding-bottom:clamp(16px,2vh,24px)}.login-topline{margin-bottom:clamp(8px,1.5vh,16px)}.intro{margin-bottom:clamp(12px,2.5vh,22px)}.field{margin-bottom:clamp(8px,1.5vh,13px)}}
+@media (max-height:700px) and (min-width:761px){.shell{height:calc(100dvh - 12px)}.login-panel{padding:12px 32px}.login-topline{margin-bottom:6px}.intro{margin-bottom:8px}.field{margin-bottom:6px}}
+</style>
 </head>
 <body>
   <main class="shell">

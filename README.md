@@ -1,48 +1,155 @@
-# AAY BEE Founder + Manager shared workspace
+# AAY BEE Electricals & Construction
+## GitHub Pages + one shared Supabase database
 
-## Roles
-- `admin` = the one Founder account.
-- `user` = Manager accounts.
-- Employee records are separate from login accounts. A Manager login is not an employee record.
+This package contains the complete website files and SQL for the Founder and Manager workspaces.
 
-## Shared database
-All pages use the one Supabase project configured in `supabase-config.js`. No local demo records or sample employees/managers/tasks are inserted. The Founder and Managers read/write the same Supabase tables, subject to Row Level Security.
+### Website files to upload to the ROOT of your GitHub repository
 
-## Apply the SQL
-1. In Supabase SQL Editor, confirm the original schema and earlier `live_collaboration.sql` have been run.
-2. Run `founder_manager_shared_database.sql`.
-3. The migration checks whether the attendance employee foreign key already exists, so that part can be rerun safely.
+Upload/replace these six files together in the same folder:
 
-## Add/remove Manager accounts
-1. Create the Manager login in Supabase Authentication > Users.
-2. The migration installs a database trigger that automatically creates a `public.profiles` row with role `user` for each newly created Auth account. The Founder page discovers it and refreshes the Manager list every five seconds. No manual profile insert is needed for newly created Managers.
-3. For the profile display name, set Auth user metadata `full_name` when creating the account. If it is not supplied, the email prefix is used.
-4. To remove a Manager from the website, delete that login in Supabase Authentication > Users. Its profile is removed by the existing cascade. Or set `active=false` in `profiles` to deactivate without deleting the Auth account. The Founder page stops showing inactive/deleted accounts after refresh.
-5. A deleted Manager's assigned tasks and messages are deleted by their account relationship. Employee records they created remain.
+- `index.html` — sign-in page and GitHub Pages entry point
+- `login.html` — same sign-in page, for direct login links
+- `admin.html` — Founder workspace
+- `user.html` — Manager workspace
+- `supabase-config.js` — connection to your Supabase project
+- `README.md` — these instructions (optional on the public site)
 
-## Founder account
-Create one Auth user, then assign the matching profile role `admin`. The existing unique index permits only one Admin profile. The Founder is not selected from a role dropdown on the website.
+Keep the HTML files and `supabase-config.js` side by side. Do not put them in different folders unless you also update their relative script paths.
 
-## Upload to GitHub Pages
-Replace these files in the root of `aaybeeelectricals/website-v1.0.0`:
-- `index.html`
-- `login.html`
-- `admin.html`
-- `user.html`
-- `supabase-config.js`
+### Your Supabase project
 
-Keep the SQL and README files outside the public website if preferred. The publishable key is browser-safe; never put a service_role/secret key in GitHub.
+The included `supabase-config.js` is already set to the Supabase project and publishable key you supplied. The publishable key is designed for browser use. Never put a Supabase `service_role` or secret key in GitHub or in an HTML/JavaScript file.
 
-## New behavior
-- Founder sees active Manager profiles dynamically and assigns tasks by Manager UUID.
-- Each Manager sees only tasks assigned to their own login.
-- Manager records attendance for a selected employee, not for themselves.
-- Attendance is keyed by employee + date, so one employee cannot be punched twice for the same date.
-- Managers can add employee records to the shared directory; Founder and other Managers see those same records.
-- Manager approval submissions go to the Founder approval inbox.
-- Founder and Manager can message each other.
-- Pages refresh shared records every five seconds.
-- No dummy data is inserted.
+## 1. Configure GitHub Pages
 
-## Verification
-The HTML JavaScript syntax was checked locally. A live end-to-end test still needs to be done after applying the SQL and uploading files, using one Founder account and at least one Manager account.
+1. Open your GitHub repository: `aaybeeelectricals/website-v1.0.0`.
+2. Upload the six website files listed above to the repository root.
+3. Choose to replace existing files when GitHub asks.
+4. Commit the changes.
+5. In Settings → Pages, make sure GitHub Pages is publishing the correct branch and root folder.
+6. Wait for deployment, then open:
+   `https://aaybeeelectricals.github.io/website-v1.0.0/`
+
+The sign-in page is `index.html`. After sign-in, the website sends the Founder to `admin.html` and Managers to `user.html` based on the role stored in Supabase.
+
+## 2. Set Supabase Auth URL configuration
+
+In Supabase:
+1. Open Authentication → URL Configuration.
+2. Set Site URL to:
+   `https://aaybeeelectricals.github.io/website-v1.0.0/`
+3. Add this to Redirect URLs:
+   `https://aaybeeelectricals.github.io/website-v1.0.0/**`
+4. Save.
+
+The current login flow uses email and password. It does not create accounts from the public login page.
+
+## 3. Apply the database SQL
+
+Choose ONE path:
+
+### Option A — Fresh Supabase database only
+
+If this Supabase project has not had the AAY BEE schema installed yet:
+1. Open Supabase → SQL Editor → New query.
+2. Open `supabase_setup_all.sql`.
+3. Copy the entire file into SQL Editor.
+4. Run it once.
+
+This combined SQL installs the base schema, task/message collaboration, attendance for employee records, approval inbox, Manager profile auto-creation, and the single Founder lookup function. It creates no sample employees, tasks, attendance, sites, designations, or messages.
+
+### Option B — Existing AAY BEE database
+
+If you already ran `supabase_schema.sql` and `live_collaboration.sql` previously:
+1. Run `founder_manager_shared_database.sql` only.
+2. Do not run `supabase_setup_all.sql` on top of the existing database.
+
+If you have only run `supabase_schema.sql`, run `live_collaboration.sql` first, then `founder_manager_shared_database.sql`.
+
+If you already ran the Founder/Manager migration, do not rerun the full base schema just to update the HTML.
+
+## 4. Set up the one Founder account
+
+The Founder must be the only profile with role `admin`.
+
+1. Supabase → Authentication → Users → Add user.
+2. Create the Founder login using the Founder email and password.
+3. Copy the user's UUID from the Auth Users list.
+4. In SQL Editor, run this after replacing the sample values:
+
+```sql
+insert into public.profiles (id, full_name, role, active)
+values ('PASTE-FOUNDER-AUTH-UUID', 'Founder Full Name', 'admin', true)
+on conflict (id) do update
+set full_name = excluded.full_name,
+    role = 'admin',
+    active = true;
+```
+
+If the Founder profile already exists, this changes its role to `admin`. The database has a one-Founder constraint, so only one active Admin profile is allowed by the existing schema's unique index.
+
+## 5. Add Manager accounts
+
+After the SQL migration is installed:
+
+1. Go to Supabase → Authentication → Users → Add user.
+2. Enter the Manager's email and password.
+3. The database trigger automatically creates a profile with role `user`.
+4. The Founder dashboard discovers active Manager profiles and refreshes the list every five seconds.
+5. The Founder can then assign tasks to the correct Manager.
+
+For the Manager's display name, set Auth user metadata `full_name` when creating the account. If no full name is supplied, the trigger uses the email prefix.
+
+If a Manager Auth account existed before the trigger was installed, create its profile manually:
+
+```sql
+insert into public.profiles (id, full_name, role, active)
+values ('PASTE-MANAGER-AUTH-UUID', 'Manager Full Name', 'user', true)
+on conflict (id) do update
+set full_name = excluded.full_name,
+    role = 'user',
+    active = true;
+```
+
+To deactivate without deleting the Auth account:
+
+```sql
+update public.profiles
+set active = false
+where id = 'PASTE-MANAGER-AUTH-UUID';
+```
+
+To permanently remove an account, delete it from Authentication → Users. Related profile and assigned task/message records follow their foreign-key delete rules. Employee records created by that Manager are retained.
+
+## 6. How the shared website works
+
+- There is one Supabase project and one shared set of tables.
+- Founder (`admin`) and Managers (`user`) do not have separate databases.
+- Managers and Founder see the same employee directory.
+- Managers can add employee records to the shared directory.
+- Managers punch attendance for a selected employee, not for their own login.
+- Attendance is unique per employee per date.
+- Founder assigns a task to one Manager account. Only that Manager sees the task.
+- Managers submit task progress through the secure `update_my_task` database function.
+- Managers send approval submissions to the Founder approval inbox.
+- Founder and Managers can exchange private messages.
+- Row Level Security (RLS) is enabled to enforce access rules in the database, not only in the webpage.
+
+## 7. First live test
+
+After deployment, test with one Founder and one Manager account:
+
+1. Sign in as Founder. Confirm the Manager appears under Managers.
+2. Add one employee. Sign in as Manager and confirm the same employee appears in Employee List.
+3. As Manager, punch attendance for that employee. Sign in as Founder and confirm the same attendance entry appears.
+4. As Founder, assign a task to that Manager. Confirm it appears in that Manager's My Tasks.
+5. As Manager, update task progress. Confirm the task status changes in Founder Task Assigner.
+6. As Manager, submit an approval. Confirm it appears in Founder Approvals.
+7. Send a message from each side and confirm both sides see the same conversation.
+
+## Important notes
+
+- This is a static GitHub Pages website connected directly to Supabase using the publishable key. Supabase RLS is the security boundary.
+- Never publish a `service_role` key.
+- The package's JavaScript syntax was checked, but the live site and database still need the first end-to-end test after SQL is applied and files are deployed.
+- The language selector is currently a visual control; the redesigned pages are English-first. The login page retains its existing English/Odia language support.

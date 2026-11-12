@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AAY BEE | User Workspace</title>
+<style>
+:root{--g:#173f35;--g2:#24594b;--sage:#e7eee8;--cream:#ffffff;--paper:#ffffff;--ink:#1d2b26;--muted:#78857e;--line:#e5e9e3;--gold:#d7ad58;--red:#b9544d;--shadow:0 12px 34px #1c372b12}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:14px/1.5 Inter,system-ui,"Segoe UI",sans-serif}html[lang=or] body,html[lang=or] button,html[lang=or] input,html[lang=or] select,html[lang=or] textarea{font-family:"Noto Sans Oriya","Nirmala UI","Kalinga",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.sidebar{background:var(--g);color:white;padding:25px 17px;display:flex;flex-direction:column;gap:28px}.brand{display:flex;align-items:center;gap:12px;padding:4px 9px 20px;border-bottom:1px solid #ffffff26}.mark{width:42px;height:42px;border-radius:13px;background:#f4eedc;color:var(--g);display:grid;place-items:center;font-weight:900}.brand strong{display:block;font-size:12px;letter-spacing:.07em}.brand small{display:block;color:#c5d4cc;font-size:9px;letter-spacing:.12em;margin-top:4px}.nav-label{color:#9db4a8;font-size:9px;font-weight:800;letter-spacing:.16em;padding:0 12px;margin-bottom:8px}nav{display:grid;gap:5px}.nav-btn{border:0;background:transparent;color:#d7e3dc;text-align:left;padding:11px 12px;border-radius:10px;display:flex;align-items:center;gap:12px;font-size:13px}.nav-btn.active,.nav-btn:hover{background:#ffffff20;color:#fff}.nav-btn.active{box-shadow:inset 3px 0 var(--gold)}.nav-icon{width:18px;text-align:center}.side-bottom{margin-top:auto;border-top:1px solid #ffffff26;padding:17px 9px 0;color:#c5d4cc;font-size:11px}.side-bottom b{display:block;color:white;margin-top:4px}
+.main{min-width:0}.topbar{height:74px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:4}.crumb{font-size:11px;color:var(--muted)}.crumb b{color:var(--g)}.top-actions{display:flex;align-items:center;gap:12px}.lang{display:flex;gap:3px;padding:3px;border:1px solid var(--line);border-radius:99px;background:white}.lang button{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:99px;font-size:10px;font-weight:800}.lang button.active{background:var(--g);color:white}.profile{display:flex;align-items:center;gap:9px;border-left:1px solid var(--line);padding-left:13px}.avatar{width:34px;height:34px;background:var(--sage);color:var(--g);border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:11px}.profile b{font-size:11px;display:block}.profile small{font-size:10px;color:var(--muted)}
+.content{padding:29px 32px 45px;max-width:1400px;margin:auto}.view{display:none}.view.active{display:block}.head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:23px}.eyebrow{font-size:9px;color:#9b8659;font-weight:900;letter-spacing:.18em;margin-bottom:7px}h1{font-size:27px;line-height:1.2;margin:0;color:var(--g);letter-spacing:-.7px}.sub{color:var(--muted);margin:7px 0 0;font-size:12px}.panel,.stat{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);min-width:0}.panel{margin-bottom:16px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.panel h3{font-size:13px;color:var(--g);margin:0}.panel-sub{font-size:10px;color:var(--muted);margin-top:3px}.btn{border:0;border-radius:9px;padding:10px 14px;font-weight:700;font-size:11px;display:inline-flex;align-items:center;gap:8px}.primary{background:var(--g);color:white}.light{background:#edf2ed;color:var(--g)}.btn:disabled{opacity:.45;cursor:not-allowed}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:17px}.stat{padding:16px 18px}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px}.stat-icon{width:32px;height:32px;border-radius:10px;background:var(--sage);display:grid;place-items:center;color:var(--g)}.stat-value{font-size:26px;font-weight:800;color:var(--g);margin:10px 0 2px}.stat-foot{font-size:10px;color:var(--muted)}.notice{border-radius:12px;padding:14px 15px;display:flex;align-items:flex-start;gap:11px;margin-bottom:16px}.warning{background:#fbf3df;border:1px solid #f0e2bd;color:#765d25}.success{background:#eaf3eb;border:1px solid #d8e8da;color:#3d7049}.notice strong{display:block;font-size:11px}.notice p{margin:3px 0 0;font-size:10px;line-height:1.55}.notice-icon{font-size:17px}.text-link{color:var(--g2);font-size:10px;font-weight:800;border:0;background:none;padding:0}.task-row{display:flex;align-items:center;gap:11px;padding:12px 0;border-top:1px solid #eef0ec}.task-row:first-child{border-top:0;padding-top:2px}.task-mark{width:32px;height:32px;border-radius:10px;background:#f3efe3;display:grid;place-items:center;color:#8c713d}.task-info{flex:1;min-width:0}.task-info b{font-size:11px;display:block}.task-info small{font-size:10px;color:var(--muted)}.pill{display:inline-flex;align-items:center;padding:4px 8px;border-radius:99px;font-size:9px;font-weight:800;white-space:nowrap}.pending{background:#f8efd9;color:#8c6b25}.done{background:#e5f1e8;color:#39704b}.missed{background:#f8e6e3;color:#a34a42}.info{background:#e8eef5;color:#486887}
+.toolbar{display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin-bottom:14px}.field{display:grid;gap:6px;margin-bottom:12px}.field label{font-size:10px;color:#68766e;font-weight:800}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;background:white;padding:10px 11px;outline:none;color:var(--ink);font-size:11px}.field input:focus,.field select:focus,.field textarea:focus{border-color:#8da99a;box-shadow:0 0 0 3px #e9f0eb}.field textarea{min-height:75px;resize:vertical}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 13px}.full{grid-column:1/-1}
+.calendar-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}.calendar{border:1px solid var(--line);border-radius:12px;padding:14px;background:white}.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.cal-head strong{font-size:12px;color:var(--g)}.cal-head button{border:1px solid var(--line);background:white;border-radius:7px;width:28px;height:28px;color:var(--g)}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}.day-label{font-size:9px;color:var(--muted);padding:5px 0;font-weight:800}.date-btn{height:35px;border:0;background:transparent;border-radius:8px;color:var(--ink);font-size:10px;position:relative}.date-btn:hover{background:var(--sage)}.date-btn.selected{background:var(--g);color:white}.date-btn.today:not(.selected){outline:1px solid var(--gold)}.date-btn.present:after,.date-btn.missed:after{content:"";width:5px;height:5px;border-radius:50%;position:absolute;bottom:3px;left:calc(50% - 2px);background:#4c9460}.date-btn.missed:after{background:var(--red)}.date-btn:disabled{opacity:.3;cursor:default}.legend{display:flex;gap:13px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:9px}.legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px}.date-detail{border:1px solid var(--line);border-radius:12px;padding:17px;background:white;min-height:220px}.date-detail h3{font-size:13px;color:var(--g);margin:0 0 4px}.date-detail p{font-size:10px;color:var(--muted);margin:0 0 14px}.status{font-size:12px;font-weight:800;margin:8px 0 15px}.lock-note{font-size:10px;color:var(--muted);background:#f4f5f1;padding:10px;border-radius:8px;line-height:1.55}
+table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:left;color:#8a958e;font-size:9px;text-transform:uppercase;letter-spacing:.1em;padding:10px 11px;border-bottom:1px solid var(--line)}td{padding:12px 11px;border-bottom:1px solid #eef0ec;font-size:11px}tbody tr:last-child td{border-bottom:0}.table-wrap{overflow:auto}.empty{padding:25px;text-align:center;color:var(--muted);font-size:11px}.readonly{background:#f2f4ef;border:1px solid var(--line);padding:11px 13px;border-radius:9px;font-size:10px;color:#64736a;margin-bottom:15px}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}.submitted{border:1px solid #dce9dc;background:#f3f8f2;padding:14px;border-radius:10px;margin-top:12px}.submitted b{display:block;font-size:11px;color:#3d7049}.submitted small{font-size:10px;color:#60756a}.mobile-menu{display:none}
+
+/* Theme support */
+body.dark-theme{--g:#d4e5da;--g2:#a9c8b5;--sage:#263b32;--cream:#111a16;--paper:#1a2721;--ink:#e7eee9;--muted:#a5b2aa;--line:#34443b;--gold:#e0bd72;--red:#e17b72;--shadow:0 12px 34px rgba(0,0,0,.22)}
+body.dark-theme .topbar{background:var(--paper)}
+body.dark-theme .lang,body.dark-theme .theme-toggle{background:#22332a;color:var(--ink);border-color:var(--line)}
+body.dark-theme .lang button.active{background:#d4e5da;color:#173f35}
+body.dark-theme .field input,body.dark-theme .field select,body.dark-theme .field textarea{background:#22332a;color:var(--ink);border-color:var(--line)}
+body.dark-theme .calendar,body.dark-theme .date-detail{background:#1a2721}
+body.dark-theme .date-btn{color:var(--ink)}
+body.dark-theme .date-btn.selected{background:var(--g);color:#173f35}
+body.dark-theme .lock-note,body.dark-theme .readonly{background:#26372e;color:#cad8ce}
+body.dark-theme .task-row,body.dark-theme td{border-color:#2d3c34}
+body.dark-theme th{color:#a5b2aa;border-color:var(--line)}
+body.dark-theme .submitted{background:#20382a;border-color:#345541}
+.theme-toggle{width:38px;height:38px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--g);font-size:17px}
+
+@media(max-width:980px){.app{grid-template-columns:215px 1fr}.content{padding:24px 20px}.topbar{padding:0 20px}.calendar-layout{grid-template-columns:1fr}}
+@media(max-width:740px){.app{display:block}.sidebar{position:fixed;z-index:8;left:-260px;top:0;bottom:0;width:250px;transition:left .2s}.sidebar.open{left:0}.mobile-menu{display:inline-flex}.topbar{height:65px;padding:0 14px}.content{padding:21px 14px 35px}.head{flex-direction:column}.profile .profile-text{display:none}.top-actions{gap:7px}.grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style></head><body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+ <div class="brand"><div class="mark">AB</div><div><strong>AAY BEE</strong><small>ELECTRICALS & CONSTRUCTION</small></div></div>
+ <div><div class="nav-label" data-en="MY WORKSPACE" data-or="ମୋ କାର୍ଯ୍ୟସ୍ଥଳ">MY WORKSPACE</div><nav>
+ <button class="nav-btn active" data-view="dashboard"><span class="nav-icon">▦</span><span data-en="Dashboard" data-or="ଡ୍ୟାସବୋର୍ଡ">Dashboard</span></button>
+ <button class="nav-btn" data-view="attendance"><span class="nav-icon">◷</span><span data-en="Punch Attendance" data-or="ଉପସ୍ଥାନ ଦାଖଲ">Punch Attendance</span></button>
+ <button class="nav-btn" data-view="employeeList"><span class="nav-icon">☷</span><span data-en="Employee List" data-or="କର୍ମଚାରୀ ତାଲିକା">Employee List</span></button>
+  <button class="nav-btn" data-view="addEmployee"><span class="nav-icon">♙</span><span data-en="Add Employee" data-or="କର୍ମଚାରୀ ଯୋଡ଼ନ୍ତୁ">Add Employee</span></button>
+ </nav></div>
+ <div class="side-bottom"><span data-en="SIGNED IN AS USER" data-or="ୟୁଜର୍ ଭାବେ ଲଗ୍ ଇନ୍">SIGNED IN AS USER</span><b>Rahul Das</b></div>
+</aside>
+<main class="main">
+<header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="btn light mobile-menu" id="menuToggle">☰</button><div class="crumb">AAY BEE / <b id="crumb" data-en="Dashboard" data-or="ଡ୍ୟାସବୋର୍ଡ">Dashboard</b></div></div>
+<div class="top-actions"><button class="theme-toggle" id="themeToggle" type="button" title="Switch theme" aria-label="Switch theme">☾</button><div class="lang" role="group" aria-label="Choose language"><button id="english" class="active" aria-pressed="true">English</button><button id="odia" aria-pressed="false">ଓଡ଼ିଆ</button></div><div class="profile"><div class="avatar">RD</div><div class="profile-text"><b>Rahul Das</b><small data-en="User" data-or="ୟୁଜର୍">User</small></div></div></div></header>
+<div class="content">
+<section class="view active" id="dashboard">
+ <div class="head"><div><div class="eyebrow" data-en="USER WORKSPACE" data-or="ୟୁଜର୍ କାର୍ଯ୍ୟସ୍ଥଳ">USER WORKSPACE</div><h1 data-en="Good morning, Rahul" data-or="ଶୁଭ ସକାଳ, ରାହୁଲ">Good morning, Rahul</h1><p class="sub" data-en="Here is your attendance and assigned work at a glance." data-or="ଏଠାରେ ଆପଣଙ୍କ ଉପସ୍ଥାନ ଏବଂ ଦିଆଯାଇଥିବା କାମର ସାରାଂଶ ରହିଛି।">Here is your attendance and assigned work at a glance.</p></div></div>
+ <div id="alerts"></div>
+ <div class="grid">
+ <div class="stat"><div class="stat-top"><span data-en="Today's Attendance" data-or="ଆଜିର ଉପସ୍ଥାନ">Today's Attendance</span><span class="stat-icon">◷</span></div><div class="stat-value" id="todayStatus">Not Marked</div><div class="stat-foot" data-en="Punch attendance to record today" data-or="ଆଜିର ଉପସ୍ଥାନ ଦାଖଲ କରନ୍ତୁ">Punch attendance to record today</div></div>
+ <div class="stat"><div class="stat-top"><span data-en="Missed Attendance" data-or="ବାକି ଥିବା ଉପସ୍ଥାନ">Missed Attendance</span><span class="stat-icon">!</span></div><div class="stat-value" id="missedCount">00</div><div class="stat-foot" data-en="Previous working days not marked" data-or="ପୂର୍ବ କାର୍ଯ୍ୟଦିବସରେ ଦାଖଲ ହୋଇନାହିଁ">Previous working days not marked</div></div>
+ <div class="stat"><div class="stat-top"><span data-en="Tasks Assigned" data-or="ଦିଆଯାଇଥିବା କାର୍ଯ୍ୟ">Tasks Assigned</span><span class="stat-icon">☷</span></div><div class="stat-value" id="taskCount">03</div><div class="stat-foot" data-en="By your administrator" data-or="ଆପଣଙ୍କ ଆଡମିନ୍ ଦ୍ୱାରା">By your administrator</div></div></div>
+ <section class="panel"><div class="panel-head"><div><h3 data-en="Tasks Assigned by Admin" data-or="ଆଡମିନ୍ ଦ୍ୱାରା ଦିଆଯାଇଥିବା କାର୍ଯ୍ୟ">Tasks Assigned by Admin</h3><div class="panel-sub" data-en="Work items and due dates shared with you" data-or="ଆପଣଙ୍କୁ ଦିଆଯାଇଥିବା କାମ ଏବଂ ଶେଷ ତାରିଖ">Work items and due dates shared with you</div></div><span class="pill info" data-en="MY TASKS" data-or="ମୋ କାର୍ଯ୍ୟ">MY TASKS</span></div><div id="taskList"></div></section>
+ <section class="panel"><div class="panel-head"><div><h3 data-en="Attendance Reminder" data-or="ଉପସ୍ଥାନ ସ୍ମାରକ">Attendance Reminder</h3><div class="panel-sub" data-en="Keep your daily attendance up to date" data-or="ଆପଣଙ୍କ ଦୈନିକ ଉପସ୍ଥାନ ନିୟମିତ ଦାଖଲ କରନ୍ତୁ">Keep your daily attendance up to date</div></div><button class="btn light" data-go="attendance" data-en="Open calendar →" data-or="କ୍ୟାଲେଣ୍ଡର ଖୋଲନ୍ତୁ →">Open calendar →</button></div><div id="reminder"></div></section>
+</section>
+<section class="view" id="attendance">
+ <div class="head"><div><div class="eyebrow" data-en="DAILY TIME RECORD" data-or="ଦୈନିକ ସମୟ ରେକର୍ଡ">DAILY TIME RECORD</div><h1 data-en="Punch Attendance" data-or="ଉପସ୍ଥାନ ଦାଖଲ">Punch Attendance</h1><p class="sub" data-en="Select a date in the calendar to view your attendance record." data-or="ଆପଣଙ୍କ ଉପସ୍ଥାନ ରେକର୍ଡ ଦେଖିବା ପାଇଁ କ୍ୟାଲେଣ୍ଡରରୁ ତାରିଖ ବାଛନ୍ତୁ।">Select a date in the calendar to view your attendance record.</p></div></div>
+ <div class="notice warning"><span class="notice-icon">ⓘ</span><div><strong data-en="Attendance cannot be changed after punching." data-or="ଉପସ୍ଥାନ ଦାଖଲ ପରେ ଏହା ବଦଳାଯାଇପାରିବ ନାହିଁ।">Attendance cannot be changed after punching.</strong><p data-en="Once you punch attendance, the record is locked. Only the Admin can change your attendance status." data-or="ଥରେ ଉପସ୍ଥାନ ଦାଖଲ କଲେ ରେକର୍ଡ ଲକ୍ ହୋଇଯିବ। କେବଳ ଆଡମିନ୍ ଆପଣଙ୍କ ଉପସ୍ଥାନ ସ୍ଥିତି ବଦଳାଇପାରିବେ।">Once you punch attendance, the record is locked. Only the Admin can change your attendance status.</p></div></div>
+ <div class="panel"><div class="panel-head"><div><h3 data-en="Attendance Calendar" data-or="ଉପସ୍ଥାନ କ୍ୟାଲେଣ୍ଡର">Attendance Calendar</h3><div class="panel-sub" data-en="Choose a date to see whether attendance was marked." data-or="ଉପସ୍ଥାନ ଦାଖଲ ହୋଇଛି କି ନାହିଁ ଦେଖିବାକୁ ତାରିଖ ବାଛନ୍ତୁ।">Choose a date to see whether attendance was marked.</div></div><span class="pill info" data-en="CALENDAR" data-or="କ୍ୟାଲେଣ୍ଡର">CALENDAR</span></div>
+ <div class="calendar-layout"><div class="calendar"><div class="cal-head"><button id="prevMonth">‹</button><strong id="monthLabel"></strong><button id="nextMonth">›</button></div><div class="cal-grid" id="calendarGrid"></div><div class="legend"><span><i style="background:#4c9460"></i><span data-en="Marked" data-or="ଦାଖଲ ହୋଇଛି">Marked</span></span><span><i style="background:#b9544d"></i><span data-en="Not marked" data-or="ଦାଖଲ ହୋଇନାହିଁ">Not marked</span></span><span><i style="background:#d7ad58"></i><span data-en="Today" data-or="ଆଜି">Today</span></span></div></div><div class="date-detail" id="dateDetail"></div></div></div>
+ <div class="panel"><div class="panel-head"><div><h3 data-en="Attendance History" data-or="ଉପସ୍ଥାନ ଇତିହାସ">Attendance History</h3><div class="panel-sub" data-en="Your submitted attendance records" data-or="ଆପଣଙ୍କ ଦାଖଲ କରାଯାଇଥିବା ଉପସ୍ଥାନ ରେକର୍ଡ">Your submitted attendance records</div></div></div><div class="table-wrap"><table><thead><tr><th data-en="Date" data-or="ତାରିଖ">Date</th><th data-en="Punch Time" data-or="ଦାଖଲ ସମୟ">Punch Time</th><th data-en="Record" data-or="ରେକର୍ଡ">Record</th><th data-en="Access" data-or="ଅନୁମତି">Access</th></tr></thead><tbody id="history"></tbody></table></div></div>
+</section>
+
+<section class="view" id="employeeList">
+ <div class="head"><div><div class="eyebrow" data-en="EMPLOYEE DIRECTORY" data-or="କର୍ମଚାରୀ ତାଲିକା">EMPLOYEE DIRECTORY</div><h1 data-en="Employee List" data-or="କର୍ମଚାରୀ ତାଲିକା">Employee List</h1><p class="sub" data-en="View the current employee directory. Editing and deletion are restricted to Admin." data-or="ବର୍ତ୍ତମାନର କର୍ମଚାରୀ ତାଲିକା ଦେଖନ୍ତୁ। ସମ୍ପାଦନା ଏବଂ ହଟାଇବା କେବଳ ଆଡମିନ୍ କରିପାରିବେ।">View the current employee directory. Editing and deletion are restricted to Admin.</p></div></div>
+ <div class="panel"><div class="toolbar"><div class="field" style="margin:0;min-width:220px;flex:1"><label data-en="Search employees" data-or="କର୍ମଚାରୀ ଖୋଜନ୍ତୁ">Search employees</label><input id="userEmployeeSearch" placeholder="Search by name, code or site"></div></div>
+ <div class="table-wrap"><table><thead><tr><th data-en="Employee" data-or="କର୍ମଚାରୀ">Employee</th><th data-en="Code" data-or="କୋଡ୍">Code</th><th data-en="Designation" data-or="ପଦବୀ">Designation</th><th data-en="Site" data-or="ସାଇଟ୍">Site</th><th data-en="Phone" data-or="ଫୋନ୍">Phone</th><th data-en="Status" data-or="ସ୍ଥିତି">Status</th></tr></thead><tbody id="userEmployeeRows"><tr><td colspan="6" class="empty">Employee list will load from Supabase after connection.</td></tr></tbody></table></div></div>
+</section>
+
+<section class="view" id="addEmployee">
+ <div class="head"><div><div class="eyebrow" data-en="EMPLOYEE REQUEST" data-or="କର୍ମଚାରୀ ଅନୁରୋଧ">EMPLOYEE REQUEST</div><h1 data-en="Add Employee" data-or="କର୍ମଚାରୀ ଯୋଡ଼ନ୍ତୁ">Add Employee</h1><p class="sub" data-en="Submit a new employee's details for Admin approval." data-or="ନୂତନ କର୍ମଚାରୀଙ୍କ ବିବରଣୀ ଆଡମିନ୍ ଅନୁମୋଦନ ପାଇଁ ଦାଖଲ କରନ୍ତୁ।">Submit a new employee's details for Admin approval.</p></div></div>
+ <div class="notice warning"><span class="notice-icon">ⓘ</span><div><strong data-en="Review all details before submitting." data-or="ଦାଖଲ ପୂର୍ବରୁ ସମସ୍ତ ବିବରଣୀ ଯାଞ୍ଚ କରନ୍ତୁ।">Review all details before submitting.</strong><p data-en="After submission, the employee information is locked. You cannot edit or delete the saved request. Contact Admin if a correction is needed." data-or="ଦାଖଲ ପରେ କର୍ମଚାରୀଙ୍କ ତଥ୍ୟ ଲକ୍ ହୋଇଯିବ। ଆପଣ ସଂରକ୍ଷିତ ଅନୁରୋଧକୁ ସମ୍ପାଦନା କିମ୍ବା ଡିଲିଟ୍ କରିପାରିବେ ନାହିଁ। ସଂଶୋଧନ ଆବଶ୍ୟକ ହେଲେ ଆଡମିନ୍‌ଙ୍କ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ।">After submission, the employee information is locked. You cannot edit or delete the saved request. Contact Admin if a correction is needed.</p></div></div>
+ <div class="panel"><div class="panel-head"><div><h3 data-en="Employee Information" data-or="କର୍ମଚାରୀଙ୍କ ବିବରଣୀ">Employee Information</h3><div class="panel-sub" data-en="Complete the form and send it for approval." data-or="ଫର୍ମ ପୂରଣ କରି ଅନୁମୋଦନ ପାଇଁ ପଠାନ୍ତୁ।">Complete the form and send it for approval.</div></div><span class="pill pending" data-en="ADMIN APPROVAL" data-or="ଆଡମିନ୍ ଅନୁମୋଦନ">ADMIN APPROVAL</span></div>
+ <div class="readonly" data-en="Fields marked with * are required. Age is calculated automatically from Date of Birth." data-or="* ଚିହ୍ନିତ ଘରଗୁଡ଼ିକ ପୂରଣ କରିବା ଆବଶ୍ୟକ। ଜନ୍ମ ତାରିଖରୁ ବୟସ ସ୍ୱୟଂଚାଳିତ ଭାବେ ଗଣନା ହେବ।">Fields marked with * are required. Age is calculated automatically from Date of Birth.</div>
+ <form id="employeeForm"><div class="form-grid">
+ <div class="field"><label for="code" data-en="Employee Code *" data-or="କର୍ମଚାରୀ କୋଡ୍ *">Employee Code *</label><input id="code" name="code" required maxlength="40" placeholder="Enter employee code"></div>
+ <div class="field"><label for="name" data-en="Employee Name *" data-or="କର୍ମଚାରୀଙ୍କ ନାମ *">Employee Name *</label><input id="name" name="name" required maxlength="100" placeholder="Enter full name"></div>
+ <div class="field"><label for="designation" data-en="Designation *" data-or="ପଦବୀ *">Designation *</label><select id="designation" name="designation" required><option value="">Select designation</option><option>Site Supervisor</option><option>Electrician</option><option>Technician</option><option>Helper</option><option>Supervisor</option></select></div>
+ <div class="field"><label for="site" data-en="Site Name *" data-or="ସାଇଟ୍ ନାମ *">Site Name *</label><select id="site" name="site" required><option value="">Select site</option><option>Project North</option><option>Project South</option><option>Head Office</option></select></div>
+ <div class="field"><label for="phone" data-en="Phone Number *" data-or="ଫୋନ୍ ନମ୍ବର *">Phone Number *</label><input id="phone" name="phone" required maxlength="10" inputmode="numeric" pattern="[0-9]{10}" placeholder="10 digit phone number"></div>
+ <div class="field"><label for="gender" data-en="Gender *" data-or="ଲିଙ୍ଗ *">Gender *</label><select id="gender" name="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+ <div class="field"><label for="dob" data-en="Date of Birth *" data-or="ଜନ୍ମ ତାରିଖ *">Date of Birth *</label><input id="dob" name="dob" type="date" required></div>
+ <div class="field"><label for="age" data-en="Age" data-or="ବୟସ">Age</label><input id="age" name="age" readonly placeholder="Auto calculated"></div>
+ <div class="field"><label for="joining" data-en="Joining Date *" data-or="ଯୋଗଦାନ ତାରିଖ *">Joining Date *</label><input id="joining" name="joining" type="date" required></div>
+ <div class="field"><label for="type" data-en="Employee Type *" data-or="କର୍ମଚାରୀ ପ୍ରକାର *">Employee Type *</label><select id="type" name="type" required><option value="">Select type</option><option>Full Time</option><option>Part Time</option><option>Contract</option></select></div>
+ <div class="field full"><label for="address" data-en="Address *" data-or="ଠିକଣା *">Address *</label><textarea id="address" name="address" required placeholder="Enter full address"></textarea></div>
+ <div class="field full"><label for="notes" data-en="Additional Notes" data-or="ଅତିରିକ୍ତ ଟିପ୍ପଣୀ">Additional Notes</label><textarea id="notes" name="notes" placeholder="Optional notes"></textarea></div></div>
+ <div class="actions"><button class="btn light" type="reset" id="clear" data-en="Clear Form" data-or="ଫର୍ମ ଖାଲି କରନ୍ତୁ">Clear Form</button><button class="btn primary" type="submit" data-en="Submit for Approval →" data-or="ଅନୁମୋଦନ ପାଇଁ ଦାଖଲ କରନ୍ତୁ →">Submit for Approval →</button></div></form><div id="submittedState" hidden></div></div>
+ <div class="panel"><div class="panel-head"><div><h3 data-en="My Submitted Requests" data-or="ମୋ ଦାଖଲ କରାଯାଇଥିବା ଅନୁରୋଧ">My Submitted Requests</h3><div class="panel-sub" data-en="Requests sent to Admin for review" data-or="ଯାଞ୍ଚ ପାଇଁ ଆଡମିନ୍‌ଙ୍କୁ ପଠାଯାଇଥିବା ଅନୁରୋଧ">Requests sent to Admin for review</div></div></div><div id="requestList" class="empty">No employee requests submitted in this preview.</div></div>
+</section>
+</div></main></div>
+<div id="toast" style="display:none;position:fixed;right:20px;bottom:20px;background:#173f35;color:white;padding:12px 16px;border-radius:10px;font-size:11px;z-index:20"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase-config.js"></script>
+<script>
+(async function(){
+  document.documentElement.style.visibility='hidden';
+  const sb=window.aaybeeSupabase;
+ const themeToggle=document.getElementById('themeToggle');
+ const applyLiveTheme=mode=>{document.body.classList.toggle('dark-theme',mode==='dark');if(themeToggle){themeToggle.textContent=mode==='dark'?'☀':'☾';themeToggle.title=mode==='dark'?'Switch to light theme':'Switch to dark theme';}try{localStorage.setItem('aaybee-theme',mode)}catch(e){}};
+ let liveTheme='light';try{liveTheme=localStorage.getItem('aaybee-theme')||'light'}catch(e){}
+ applyLiveTheme(liveTheme);
+ if(themeToggle)themeToggle.addEventListener('click',()=>applyLiveTheme(document.body.classList.contains('dark-theme')?'light':'dark'));
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){window.location.replace('./login.html');return;}
+  const {data:profile,error}=await sb.from('profiles').select('full_name,role,active').eq('id',session.user.id).single();
+  if(error||!profile||!profile.active||profile.role!=='user'){await sb.auth.signOut();window.location.replace('./login.html');return;}
+  document.documentElement.style.visibility='visible';
+  document.querySelectorAll('.profile b,.side-bottom b').forEach(el=>el.textContent=profile.full_name);
+  const actions=document.querySelector('.top-actions');
+  if(actions&&!document.getElementById('aaybeeLogout')){const b=document.createElement('button');b.id='aaybeeLogout';b.type='button';b.className='theme-toggle';b.textContent='↪';b.title='Sign out';b.setAttribute('aria-label','Sign out');b.onclick=async()=>{await sb.auth.signOut();window.location.replace('./login.html');};actions.appendChild(b);}
+  window.AAYBEE_CURRENT_PROFILE=profile;
+})();
+</script>
+
+
+<style>
+.sidebar{display:none!important}.app{grid-template-columns:1fr!important}.lang-switch,.language-switch{display:none!important}
+.live-shell{max-width:1450px;margin:0 auto;padding:26px 30px 50px;color:var(--ink)}
+.live-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px}
+.live-head h1{margin:0;color:var(--forest);font-size:27px}
+.live-head p{color:var(--muted);margin:6px 0 0}
+.live-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.live-tab{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:9px 14px;border-radius:9px;font-weight:700;cursor:pointer}
+.live-tab.active{background:var(--forest);color:#fff}
+.live-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:16px}
+.live-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0;box-shadow:var(--shadow)}
+.live-card h3{margin:0 0 12px;color:var(--forest);font-size:15px}
+.live-form{display:grid;gap:10px}
+.live-form input,.live-form select,.live-form textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);font:inherit}
+.live-form textarea{min-height:75px;resize:vertical}
+.live-btn{border:0;border-radius:9px;background:var(--forest);color:white;padding:10px 14px;font-weight:750;cursor:pointer}
+.live-btn.secondary{background:#e9efe9;color:#244b3b}
+.live-list{display:grid;gap:10px}
+.live-item{border:1px solid var(--line);border-radius:11px;padding:12px;background:var(--paper)}
+.live-item-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.live-item strong{display:block;color:var(--ink)}
+.live-muted{color:var(--muted);font-size:12px}
+.live-status{font-size:11px;font-weight:800;padding:4px 8px;border-radius:99px;background:#f4edda;color:#806326;white-space:nowrap}
+.live-status.completed{background:#e1efe5;color:#2d6942}
+.live-status.in_progress{background:#e6edf7;color:#42658d}
+.live-chat{height:340px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:9px;margin-bottom:10px}
+.live-msg{max-width:88%;padding:9px 11px;border-radius:11px;background:#edf2ed;align-self:flex-start;color:#24362c}
+.live-msg.mine{background:#dcebe1;align-self:flex-end}
+.live-msg small{display:block;color:#607266;font-size:10px;margin-top:4px}
+.live-empty{padding:24px 10px;text-align:center;color:var(--muted);font-size:13px}
+.live-table{width:100%;border-collapse:collapse}
+.live-table th,.live-table td{padding:9px;border-bottom:1px solid var(--line);text-align:left;font-size:12px;vertical-align:top}
+.live-table th{color:var(--muted);font-size:10px;text-transform:uppercase}
+.live-section{display:none}.live-section.active{display:block}
+.live-note{padding:10px 12px;background:rgba(215,173,88,.13);border-radius:9px;color:var(--muted);font-size:12px;margin-bottom:14px}
+@media(max-width:900px){.live-grid{grid-template-columns:1fr}.live-shell{padding:18px 14px 35px}}
+</style>
+<script>
+(async function(){
+ const sb=window.aaybeeSupabase;
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session){location.replace('./login.html');return;}
+ const {data:me,error:meErr}=await sb.from('profiles').select('id,full_name,role,active').eq('id',session.user.id).single();
+ if(meErr||!me||!me.active||me.role!=='user'){await sb.auth.signOut();location.replace('./login.html');return;}
+ const content=document.querySelector('.content');
+ content.querySelectorAll(':scope > .view').forEach(x=>x.remove());
+ const live=document.createElement('section');live.className='live-shell';live.id='liveUser';
+ live.innerHTML=`
+  <div class="live-head"><div><div class="eyebrow">AAY BEE · EMPLOYEE WORKSPACE</div><h1>Welcome, ${String(me.full_name).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}</h1><p>Your tasks, attendance and messages are shared with the company Admin.</p></div><button class="live-btn secondary" id="liveRefresh">Refresh data</button></div>
+  <div class="live-tabs">
+   <button class="live-tab active" data-tab="tasks">My Tasks</button>
+   <button class="live-tab" data-tab="messages">Message Admin</button>
+   <button class="live-tab" data-tab="employees">Employee Directory</button>
+   <button class="live-tab" data-tab="attendance">My Attendance</button>
+  </div>
+  <section class="live-section active" id="tab-tasks"><div class="live-card"><h3>Tasks assigned by Admin</h3><p class="live-muted">Change the task status and add a progress note. The Admin will see your update.</p><div id="userTasks" class="live-list"><div class="live-empty">Loading your tasks…</div></div></div></section>
+  <section class="live-section" id="tab-messages"><div class="live-grid">
+   <div class="live-card"><h3>Conversation with Admin</h3><div id="userChat" class="live-chat"><div class="live-empty">Loading messages…</div></div><form id="userMessageForm" class="live-form"><textarea name="body" placeholder="Write a message to Admin…" required maxlength="4000"></textarea><button class="live-btn" type="submit">Send to Admin</button></form></div>
+   <div class="live-card"><h3>Direct communication</h3><p class="live-muted">Your messages go to the single company Admin. Replies from the Admin will appear in this conversation. This is shared through Supabase, not saved only on this device.</p><div class="live-note">Messages and task updates refresh automatically about every 5 seconds.</div></div>
+  </div></section>
+  <section class="live-section" id="tab-employees"><div class="live-card"><h3>Employee Directory</h3><p class="live-muted">Read-only shared employee information.</p><div id="userEmployees"></div></div></section>
+  <section class="live-section" id="tab-attendance"><div class="live-grid">
+   <div class="live-card"><h3>Today's attendance</h3><p class="live-muted">Your attendance is stored in the shared database. You can punch once per day.</p><button class="live-btn" id="punchAttendance">Punch attendance</button><div id="attendanceState" class="live-muted" style="margin-top:12px"></div></div>
+   <div class="live-card"><h3>My attendance history</h3><div id="userAttendance"></div></div>
+  </div></section>`;
+ content.appendChild(live);
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ let adminId=null;
+ function tab(name){document.querySelectorAll('#liveUser .live-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));document.querySelectorAll('#liveUser .live-section').forEach(s=>s.classList.toggle('active',s.id==='tab-'+name));}
+ document.querySelectorAll('#liveUser .live-tab').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+ const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+ async function loadAdmin(){const {data,error}=await sb.rpc('get_company_admin');if(error)throw error;adminId=data?.[0]?.admin_id||null;if(!adminId)throw new Error('Company Admin account is not configured.');}
+ async function loadTasks(){
+  const {data,error}=await sb.from('tasks').select('*').eq('assigned_to',me.id).order('created_at',{ascending:false});if(error)throw error;
+  $('userTasks').innerHTML=(data||[]).length?(data||[]).map(t=>`<article class="live-item"><div class="live-item-top"><div><strong>${esc(t.title)}</strong><div class="live-muted">Due ${esc(t.due_date||'Not set')}</div></div><span class="live-status ${esc(t.status)}">${esc(t.status.replace('_',' '))}</span></div><p class="live-muted">${esc(t.details||'No additional instructions.')}</p>${t.status==='completed'?'<div class="live-muted">This task is completed.</div>':`<form class="live-form task-update-form" data-task="${t.id}"><select name="status"><option value="pending" ${t.status==='pending'?'selected':''}>Pending</option><option value="in_progress" ${t.status==='in_progress'?'selected':''}>In progress</option><option value="completed">Completed</option></select><textarea name="note" placeholder="What have you done? Any issue or update?"></textarea><button class="live-btn" type="submit">Send update to Admin</button></form>`}</article>`).join(''):'<div class="live-empty">No tasks assigned yet. Your Admin will assign tasks here.</div>';
+  document.querySelectorAll('.task-update-form').forEach(form=>form.onsubmit=async e=>{e.preventDefault();const fd=new FormData(form);try{const {error}=await sb.rpc('update_my_task',{p_task_id:form.dataset.task,p_status:fd.get('status'),p_note:fd.get('note').trim()||null});if(error)throw error;await loadTasks();alert('Your task update has been sent to Admin.');}catch(err){alert('Update could not be sent: '+err.message);}});
+ }
+ async function loadMessages(){
+  const {data,error}=await sb.from('messages').select('*').or(`and(sender_id.eq.${me.id},recipient_id.eq.${adminId}),and(sender_id.eq.${adminId},recipient_id.eq.${me.id})`).order('created_at');if(error)throw error;
+  $('userChat').innerHTML=(data||[]).length?(data||[]).map(m=>`<div class="live-msg ${m.sender_id===me.id?'mine':''}">${esc(m.body)}<small>${m.sender_id===me.id?'You':'Admin'} · ${new Date(m.created_at).toLocaleString()}</small></div>`).join(''):'<div class="live-empty">No messages yet. Send a message to your Admin.</div>';
+  $('userChat').scrollTop=$('userChat').scrollHeight;
+ }
+ async function loadEmployees(){
+  const {data,error}=await sb.from('employees').select('employee_code,full_name,designation,site,status').order('full_name');if(error)throw error;
+  $('userEmployees').innerHTML=(data||[]).length?`<table class="live-table"><thead><tr><th>Code</th><th>Name</th><th>Designation</th><th>Site</th><th>Status</th></tr></thead><tbody>${data.map(e=>`<tr><td>${esc(e.employee_code)}</td><td>${esc(e.full_name)}</td><td>${esc(e.designation||'')}</td><td>${esc(e.site||'')}</td><td>${esc(e.status)}</td></tr>`).join('')}</tbody></table>`:'<div class="live-empty">No employee records have been added yet.</div>';
+ }
+ async function loadAttendance(){
+  const {data,error}=await sb.from('attendance').select('attendance_date,punched_at,status').eq('user_id',me.id).order('attendance_date',{ascending:false}).limit(60);if(error)throw error;
+  const marked=(data||[]).some(a=>a.attendance_date===today());
+  $('attendanceState').textContent=marked?'Attendance already submitted today.':'Attendance has not been submitted today.';
+  $('punchAttendance').disabled=marked;$('punchAttendance').textContent=marked?'Attendance submitted':'Punch attendance';
+  $('userAttendance').innerHTML=(data||[]).length?`<table class="live-table"><thead><tr><th>Date</th><th>Time</th><th>Status</th></tr></thead><tbody>${data.map(a=>`<tr><td>${esc(a.attendance_date)}</td><td>${new Date(a.punched_at).toLocaleTimeString()}</td><td>${esc(a.status)}</td></tr>`).join('')}</tbody></table>`:'<div class="live-empty">No attendance records yet.</div>';
+ }
+ async function refresh(){try{await Promise.all([loadTasks(),loadMessages(),loadEmployees(),loadAttendance()]);}catch(e){console.error(e);$('userTasks').innerHTML=`<div class="live-empty">Could not load shared data: ${esc(e.message)}. Check the SQL setup.</div>`;}}
+ $('userMessageForm').onsubmit=async e=>{e.preventDefault();const body=new FormData(e.currentTarget).get('body').trim();if(!body)return;try{const {error}=await sb.from('messages').insert({sender_id:me.id,recipient_id:adminId,body});if(error)throw error;e.currentTarget.reset();await loadMessages();}catch(err){alert('Message could not be sent: '+err.message);}};
+ $('punchAttendance').onclick=async()=>{try{const {error}=await sb.from('attendance').insert({user_id:me.id,attendance_date:today(),status:'present'});if(error)throw error;await loadAttendance();alert('Attendance submitted.');}catch(err){alert('Attendance could not be submitted: '+err.message);}};
+ $('liveRefresh').onclick=refresh;
+ try{await loadAdmin();await refresh();}catch(e){$('userTasks').innerHTML=`<div class="live-empty">${esc(e.message)}</div>`;}
+ setInterval(refresh,5000);
+})();
+</script>
+
+</body></html>

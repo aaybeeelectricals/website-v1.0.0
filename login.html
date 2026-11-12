@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#142d2b" />
+  <title>AAY BEE | Sign In</title>
+  <style>
+    :root {
+      --forest: #173b35;
+      --forest-deep: #102b28;
+      --lime: #d4e36a;
+      --ink: #172522;
+      --muted: #73807a;
+      --line: #e4e9e3;
+      --paper: #fbfcf8;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      color: var(--ink);
+      background: #ffffff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .shell {
+      width: min(1060px, 100%);
+      min-height: 650px;
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      overflow: hidden;
+      border-radius: 26px;
+      background: var(--white);
+      box-shadow: 0 28px 80px rgba(24, 48, 39, .14);
+    }
+    .brand-panel {
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 42px 44px 36px;
+      color: #fff;
+      background: var(--forest);
+      overflow: hidden;
+    }
+    .brand-panel::before, .brand-panel::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border: 1px solid rgba(220, 235, 184, .18);
+      border-radius: 50%;
+    }
+    .brand-panel::before { width: 510px; height: 510px; right: -245px; top: 90px; }
+    .brand-panel::after { width: 360px; height: 360px; right: -170px; top: 165px; }
+    .brand-top { display: flex; align-items: center; gap: 13px; }
+    .brand-mark {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border-radius: 14px; background: var(--lime); color: var(--forest-deep);
+      font-weight: 900; font-size: 17px; letter-spacing: -1.4px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.12);
+    }
+    .brand-name { font-size: 13px; line-height: 1.35; font-weight: 800; letter-spacing: 1.25px; }
+    .brand-name span { display: block; color: #c6d5ca; font-size: 9px; font-weight: 600; letter-spacing: 2.1px; margin-top: 3px; }
+    .brand-copy { max-width: 390px; margin: 54px 0 70px; }
+    .eyebrow { color: var(--lime); font-size: 10px; font-weight: 800; letter-spacing: 2.6px; text-transform: uppercase; }
+    .brand-copy h1 { margin: 18px 0 17px; font-size: clamp(38px, 4.5vw, 55px); line-height: 1.05; letter-spacing: -2.8px; font-weight: 650; }
+    .brand-copy p { max-width: 340px; margin: 0; color: #c6d5ce; font-size: 14px; line-height: 1.8; }
+    .brand-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: #b7c8be; font-size: 10px; letter-spacing: .7px; }
+    .brand-foot strong { color: #f1f5ef; font-weight: 700; }
+    .login-panel { display: flex; align-items: center; justify-content: center; padding: 58px 58px 48px; background: var(--paper); }
+    .login-content { width: 100%; max-width: 355px; }
+
+    .mobile-brand { display: none; }
+    .language-switch {
+      display: inline-flex; align-items: center; gap: 3px; padding: 4px;
+      border: 1px solid var(--line); border-radius: 999px; background: #fff;
+    }
+    .language-switch button {
+      min-width: 66px; padding: 8px 11px; border: 0; border-radius: 999px;
+      background: transparent; color: #718078; cursor: pointer;
+      font: inherit; font-size: 10px; font-weight: 800;
+    }
+    .language-switch button.active { background: var(--forest); color: #fff; }
+    .login-topline { display: flex; justify-content: flex-end; margin-bottom: 24px; }
+    [lang="or"] body, [lang="or"] input, [lang="or"] button {
+      font-family: "Noto Sans Oriya", "Nirmala UI", "Kalinga", sans-serif;
+    }
+
+    .form-kicker { color: #839087; font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+    .login-content h2 { margin: 12px 0 8px; color: #1c2c27; font-size: 31px; letter-spacing: -1.2px; font-weight: 700; }
+    .intro { margin: 0 0 34px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .field { margin-bottom: 19px; }
+    label { display: block; margin-bottom: 9px; color: #35453e; font-size: 11px; font-weight: 750; letter-spacing: .35px; }
+    .input-wrap { position: relative; }
+    input {
+      width: 100%; height: 51px; padding: 0 15px; outline: none;
+      border: 1px solid var(--line); border-radius: 10px;
+      background: #fff; color: var(--ink); font: inherit; font-size: 13px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    input::placeholder { color: #aab3ad; }
+    input:focus { border-color: #7f9b82; box-shadow: 0 0 0 3px rgba(98, 137, 103, .12); }
+    .password-input { padding-right: 76px; }
+    .show-btn {
+      position: absolute; top: 50%; right: 12px; transform: translateY(-50%);
+      border: 0; background: transparent; color: #6b7a70; cursor: pointer;
+      font: inherit; font-size: 10px; font-weight: 800; letter-spacing: .8px;
+    }
+    .form-row { display: flex; justify-content: flex-end; margin: -3px 0 25px; }
+    .text-button { padding: 0; border: 0; background: transparent; color: #55765f; font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
+    .submit {
+      width: 100%; height: 52px; display: flex; align-items: center; justify-content: center; gap: 11px;
+      border: 0; border-radius: 10px; background: var(--forest); color: #fff;
+      font: inherit; font-size: 12px; font-weight: 800; letter-spacing: .8px; cursor: pointer;
+      box-shadow: 0 9px 18px rgba(23, 59, 53, .14); transition: background .2s, transform .2s;
+    }
+    .submit:hover { background: #214b42; transform: translateY(-1px); }
+    .submit:active { transform: translateY(0); }
+    .arrow { font-size: 17px; line-height: 1; color: var(--lime); }
+    .notice { display: none; margin-top: 14px; padding: 11px 12px; border: 1px solid #e7dfbd; border-radius: 9px; background: #fffbea; color: #75652e; font-size: 11px; line-height: 1.5; }
+    .notice.show { display: block; }
+    .secure-note { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 27px; color: #8a968e; font-size: 10px; }
+    .lock { width: 13px; height: 13px; border: 1.5px solid #829187; border-radius: 3px; position: relative; }
+    .lock::before { content: ""; position: absolute; width: 6px; height: 6px; border: 1.5px solid #829187; border-bottom: 0; border-radius: 6px 6px 0 0; left: 2px; top: -6px; }
+    .copyright { margin-top: 52px; text-align: center; color: #a0aaa3; font-size: 9px; letter-spacing: .35px; }
+
+    .theme-toggle{border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--forest);width:36px;height:36px;cursor:pointer;font-size:16px}
+    body.dark-theme{--ink:#e7eee9;--muted:#a5b2aa;--line:#34443b;--paper:#1a2721;--white:#1a2721;background:#111a16;color:var(--ink)}
+    body.dark-theme .shell{background:var(--paper);box-shadow:0 28px 80px rgba(0,0,0,.35)}
+    body.dark-theme .login-panel{background:var(--paper)}
+    body.dark-theme .login-content h2,body.dark-theme label{color:#e7eee9}
+    body.dark-theme input{background:#22332a;color:#e7eee9;border-color:#34443b}
+    body.dark-theme .language-switch{background:#22332a;border-color:#34443b}
+    body.dark-theme .language-switch button{color:#a5b2aa}
+    body.dark-theme .language-switch button.active{background:#d4e5da;color:#173b35}
+    body.dark-theme .notice{background:#403a25;color:#f0d99d;border-color:#66582f}
+    body.dark-theme .mobile-brand .brand-name{color:#e7eee9}
+
+    @media (max-width: 760px) {
+      body { padding: 15px; background: #ffffff; }
+      .shell { max-width: 460px; min-height: auto; grid-template-columns: 1fr; border-radius: 20px; }
+      .brand-panel { display: none; }
+      .login-panel { padding: 35px 27px 27px; }
+      .mobile-brand { display: flex; align-items: center; gap: 11px; margin-bottom: 38px; }
+      .mobile-brand .brand-mark { width: 42px; height: 42px; border-radius: 12px; }
+      .mobile-brand .brand-name { color: var(--forest); }
+      .mobile-brand .brand-name span { color: #849188; }
+      .login-content h2 { font-size: 29px; }
+      .copyright { margin-top: 38px; }
+    }
+    @media (max-width: 360px) { .login-panel { padding-inline: 20px; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="brand-panel" aria-label="Company introduction">
+      <div class="brand-top">
+        <div class="brand-mark">AB</div>
+        <div class="brand-name">AAY BEE<span>ELECTRICALS &amp; CONSTRUCTION</span></div>
+      </div>
+      <div class="brand-copy">
+        <div class="eyebrow" data-en="PEOPLE · PROJECTS · PROGRESS" data-or="ଲୋକ · ପ୍ରକଳ୍ପ · ପ୍ରଗତି">PEOPLE · PROJECTS · PROGRESS</div>
+        <h1 data-en="Good work|starts with|good people." data-or="ଭଲ କାମ|ଆରମ୍ଭ ହୁଏ|ଭଲ ଲୋକଙ୍କଠାରୁ।">Good work<br>starts with<br>good people.</h1>
+        <p data-en="A simple, organised workspace for the people who keep every project moving." data-or="ପ୍ରତ୍ୟେକ ପ୍ରକଳ୍ପକୁ ଆଗକୁ ବଢ଼ାଉଥିବା ଲୋକଙ୍କ ପାଇଁ ଏକ ସରଳ ଓ ସୁସଂଗଠିତ କାର୍ଯ୍ୟସ୍ଥଳ।">A simple, organised workspace for the people who keep every project moving.</p>
+      </div>
+      <div class="brand-foot"><span data-en="WORKFORCE PORTAL" data-or="କର୍ମଚାରୀ ପୋର୍ଟାଲ">WORKFORCE PORTAL</span><strong>OWNER: SUSANTA KUMAR SAHU</strong></div>
+    </section>
+
+    <section class="login-panel">
+      <div class="login-content">
+        <div class="login-topline" style="align-items:center;gap:9px"><button class="theme-toggle" id="themeToggle" type="button" title="Switch theme" aria-label="Switch theme">☾</button>
+          <div class="language-switch" role="group" aria-label="Choose language">
+            <button type="button" class="active" id="englishButton" aria-pressed="true">English</button>
+            <button type="button" id="odiaButton" aria-pressed="false">ଓଡ଼ିଆ</button>
+          </div>
+        </div>
+        <div class="mobile-brand">
+          <div class="brand-mark">AB</div>
+          <div class="brand-name">AAY BEE<span>ELECTRICALS &amp; CONSTRUCTION</span></div>
+        </div>
+        <div class="form-kicker" data-en="WORKFORCE PORTAL" data-or="କର୍ମଚାରୀ ପୋର୍ଟାଲ">WORKFORCE PORTAL</div>
+        <h2 data-en="Welcome back." data-or="ପୁଣିଥରେ ସ୍ୱାଗତ।">Welcome back.</h2>
+        <p class="intro" data-en="Sign in to continue to your workspace." data-or="ଆପଣଙ୍କ କାର୍ଯ୍ୟସ୍ଥଳକୁ ଯିବା ପାଇଁ ସାଇନ୍ ଇନ୍ କରନ୍ତୁ।">Sign in to continue to your workspace.</p>
+        <form id="loginForm">
+          <div class="field">
+            <label for="email" data-en="EMAIL ADDRESS" data-or="ଇମେଲ୍ ଠିକଣା">EMAIL ADDRESS</label>
+            <input id="email" name="email" type="email" placeholder="you@company.com" data-en-placeholder="you@company.com" data-or-placeholder="ଆପଣଙ୍କ ଇମେଲ୍ ଠିକଣା" autocomplete="username" required />
+          </div>
+          <div class="field">
+            <label for="password" data-en="PASSWORD" data-or="ପାସୱାର୍ଡ">PASSWORD</label>
+            <div class="input-wrap">
+              <input class="password-input" id="password" name="password" type="password" placeholder="Enter your password" data-en-placeholder="Enter your password" data-or-placeholder="ଆପଣଙ୍କ ପାସୱାର୍ଡ ଲେଖନ୍ତୁ" autocomplete="current-password" required />
+              <button class="show-btn" id="togglePassword" type="button" aria-label="Show password" data-en-show="SHOW" data-or-show="ଦେଖନ୍ତୁ">SHOW</button>
+            </div>
+          </div>
+          <div class="form-row"><button class="text-button" type="button" id="helpButton" data-en="Need help signing in?" data-or="ସାଇନ୍ ଇନ୍ କରିବାରେ ସାହାଯ୍ୟ ଦରକାର କି?">Need help signing in?</button></div>
+          <button class="submit" type="submit"><span id="signInText">SIGN IN</span> <span class="arrow">→</span></button>
+          <div class="notice" id="notice" role="status"></div>
+        </form>
+        <div class="secure-note"><span class="lock" aria-hidden="true"></span> <span data-en="Private company workspace" data-or="କମ୍ପାନୀର ବ୍ୟକ୍ତିଗତ କାର୍ଯ୍ୟସ୍ଥଳ">Private company workspace</span></div>
+        <div class="copyright" data-en="© 2026 AAY BEE ELECTRICALS &amp; CONSTRUCTION" data-or="© ୨୦୨୬ AAY BEE ELECTRICALS &amp; CONSTRUCTION">© 2026 AAY BEE ELECTRICALS &amp; CONSTRUCTION</div>
+      </div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./supabase-config.js"></script>
+  <script>
+    // Supabase email/password authentication with role-based routing.
+    const password = document.getElementById('password');
+    const toggle = document.getElementById('togglePassword');
+    const notice = document.getElementById('notice');
+    const englishButton = document.getElementById('englishButton');
+    const odiaButton = document.getElementById('odiaButton');
+    let currentLanguage = 'en';
+
+    const messages = {
+      en: {
+        show: 'SHOW', hide: 'HIDE',
+        demo: 'This is a visual login page only. Authentication has not been connected.',
+        help: 'Please contact your company administrator for sign-in assistance.'
+      },
+      or: {
+        show: 'ଦେଖନ୍ତୁ', hide: 'ଲୁଚାନ୍ତୁ',
+        demo: 'ଏହା କେବଳ ଏକ ଲଗଇନ୍ ପୃଷ୍ଠାର ନମୁନା। ଏଥିରେ ଲଗଇନ୍ ଯାଞ୍ଚ ବ୍ୟବସ୍ଥା ଯୋଡ଼ାଯାଇନାହିଁ।',
+        help: 'ସାଇନ୍ ଇନ୍ ସହାୟତା ପାଇଁ ଦୟାକରି କମ୍ପାନୀ ପ୍ରଶାସକଙ୍କ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ।'
+      }
+    };
+
+    function setLanguage(language) {
+      currentLanguage = language;
+      document.documentElement.lang = language === 'or' ? 'or' : 'en';
+      document.querySelectorAll('[data-en][data-or]').forEach(element => {
+        const value = element.dataset[language];
+        if (element.tagName === 'H1') {
+          element.innerHTML = value.split('|').join('<br>');
+        } else {
+          element.textContent = value;
+        }
+      });
+      document.querySelectorAll('input[data-en-placeholder]').forEach(input => {
+        input.placeholder = input.dataset[language + 'Placeholder'];
+      });
+      englishButton.classList.toggle('active', language === 'en');
+      odiaButton.classList.toggle('active', language === 'or');
+      englishButton.setAttribute('aria-pressed', String(language === 'en'));
+      odiaButton.setAttribute('aria-pressed', String(language === 'or'));
+      document.getElementById('signInText').textContent = language === 'en' ? 'SIGN IN' : 'ସାଇନ୍ ଇନ୍';
+      toggle.textContent = password.type === 'password' ? messages[language].show : messages[language].hide;
+      toggle.setAttribute('aria-label', password.type === 'password' ? (language === 'en' ? 'Show password' : 'ପାସୱାର୍ଡ ଦେଖନ୍ତୁ') : (language === 'en' ? 'Hide password' : 'ପାସୱାର୍ଡ ଲୁଚାନ୍ତୁ'));
+      if (notice.classList.contains('show')) notice.textContent = notice.dataset.messageType === 'help' ? messages[language].help : messages[language].demo;
+    }
+
+    englishButton.addEventListener('click', () => setLanguage('en'));
+    odiaButton.addEventListener('click', () => setLanguage('or'));
+
+    toggle.addEventListener('click', () => {
+      const reveal = password.type === 'password';
+      password.type = reveal ? 'text' : 'password';
+      toggle.textContent = reveal ? messages[currentLanguage].hide : messages[currentLanguage].show;
+      toggle.setAttribute('aria-label', reveal
+        ? (currentLanguage === 'en' ? 'Hide password' : 'ପାସୱାର୍ଡ ଲୁଚାନ୍ତୁ')
+        : (currentLanguage === 'en' ? 'Show password' : 'ପାସୱାର୍ଡ ଦେଖନ୍ତୁ'));
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    function setTheme(mode){
+      document.body.classList.toggle('dark-theme', mode === 'dark');
+      themeToggle.textContent = mode === 'dark' ? '☀' : '☾';
+      themeToggle.title = mode === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+      localStorage.setItem('aaybee-theme', mode);
+    }
+    setTheme(localStorage.getItem('aaybee-theme') || 'light');
+    themeToggle.addEventListener('click', () => setTheme(document.body.classList.contains('dark-theme') ? 'light' : 'dark'));
+
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const submit = form.querySelector('button[type="submit"]');
+      const email = document.getElementById('email').value.trim();
+      const passwordValue = password.value;
+      submit.disabled = true;
+      document.getElementById('signInText').textContent = currentLanguage === 'en' ? 'SIGNING IN…' : 'ସାଇନ୍ ଇନ୍ ହେଉଛି…';
+      notice.classList.remove('show');
+      try {
+        const { data, error } = await window.aaybeeSupabase.auth.signInWithPassword({ email, password: passwordValue });
+        if (error) throw error;
+        const { data: profile, error: profileError } = await window.aaybeeSupabase
+          .from('profiles').select('full_name, role, active').eq('id', data.user.id).single();
+        if (profileError || !profile || !profile.active || !['admin','user'].includes(profile.role)) {
+          await window.aaybeeSupabase.auth.signOut();
+          throw new Error('Your account is not active or does not have an assigned workspace. Contact the administrator.');
+        }
+        sessionStorage.setItem('aaybee_profile_name', profile.full_name || '');
+        window.location.href = profile.role === 'admin' ? './admin.html' : './user.html';
+      } catch (error) {
+        notice.textContent = error.message || (currentLanguage === 'en' ? 'Unable to sign in. Please try again.' : 'ସାଇନ୍ ଇନ୍ ହୋଇପାରିଲା ନାହିଁ। ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।');
+        notice.dataset.messageType = 'error';
+        notice.classList.add('show');
+      } finally {
+        submit.disabled = false;
+        document.getElementById('signInText').textContent = currentLanguage === 'en' ? 'SIGN IN' : 'ସାଇନ୍ ଇନ୍';
+      }
+    });
+
+    document.getElementById('helpButton').addEventListener('click', () => {
+      notice.textContent = messages[currentLanguage].help;
+      notice.dataset.messageType = 'help';
+      notice.classList.add('show');
+    });
+  </script>
+</body>
+</html>

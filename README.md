@@ -1,50 +1,48 @@
-# AAY BEE Live Collaboration Update
+# AAY BEE Founder + Manager shared workspace
 
-## What this update changes
-- Uses the same Supabase database for the one Admin and all User accounts.
-- Admin assigns tasks to an existing active User account.
-- Assigned tasks appear in that User's workspace.
-- Users can submit Pending, In progress, or Completed updates with a note.
-- Admin can see every task update and the latest task status.
-- Users can message the single Admin. Admin can select an employee and reply.
-- Employee directory and attendance are read from the same Supabase database.
-- User attendance punches are stored in Supabase and visible to Admin.
-- Data refreshes automatically about every 5 seconds.
-- No demo/sample records are inserted by this update.
+## Roles
+- `admin` = the one Founder account.
+- `user` = Manager accounts.
+- Employee records are separate from login accounts. A Manager login is not an employee record.
 
-## Important: run SQL in the correct order
-1. In Supabase SQL Editor, run your original `supabase_schema.sql` first, if you have not already run it.
-2. Then run the complete `live_collaboration.sql` file from this package.
-3. Make sure there is exactly one active profile with role `admin`.
-4. Make sure every employee has an Auth account and a matching active row in `public.profiles` with role `user`.
+## Shared database
+All pages use the one Supabase project configured in `supabase-config.js`. No local demo records or sample employees/managers/tasks are inserted. The Founder and Managers read/write the same Supabase tables, subject to Row Level Security.
 
-## Upload to GitHub
-Upload and overwrite these files in the ROOT of `aaybeeelectricals/website-v1.0.0`:
+## Apply the SQL
+1. In Supabase SQL Editor, confirm the original schema and earlier `live_collaboration.sql` have been run.
+2. Run `founder_manager_shared_database.sql`.
+3. The migration checks whether the attendance employee foreign key already exists, so that part can be rerun safely.
+
+## Add/remove Manager accounts
+1. Create the Manager login in Supabase Authentication > Users.
+2. The migration installs a database trigger that automatically creates a `public.profiles` row with role `user` for each newly created Auth account. The Founder page discovers it and refreshes the Manager list every five seconds. No manual profile insert is needed for newly created Managers.
+3. For the profile display name, set Auth user metadata `full_name` when creating the account. If it is not supplied, the email prefix is used.
+4. To remove a Manager from the website, delete that login in Supabase Authentication > Users. Its profile is removed by the existing cascade. Or set `active=false` in `profiles` to deactivate without deleting the Auth account. The Founder page stops showing inactive/deleted accounts after refresh.
+5. A deleted Manager's assigned tasks and messages are deleted by their account relationship. Employee records they created remain.
+
+## Founder account
+Create one Auth user, then assign the matching profile role `admin`. The existing unique index permits only one Admin profile. The Founder is not selected from a role dropdown on the website.
+
+## Upload to GitHub Pages
+Replace these files in the root of `aaybeeelectricals/website-v1.0.0`:
 - `index.html`
+- `login.html`
 - `admin.html`
 - `user.html`
-- `login.html`
 - `supabase-config.js`
 
-Also upload `live_collaboration.sql` for reference (it does not need to be hosted by GitHub Pages).
-Keep `supabase-config.js` in the repository root, next to the HTML pages.
+Keep the SQL and README files outside the public website if preferred. The publishable key is browser-safe; never put a service_role/secret key in GitHub.
 
-## Test
-1. Open `https://aaybeeelectricals.github.io/website-v1.0.0/`.
-2. Sign in as the Admin.
-3. Assign a task to an active User.
-4. Open a private/incognito window or another browser and sign in as that User.
-5. The task should appear in My Tasks within about 5 seconds.
-6. Change the status and submit a progress note.
-7. Return to Admin. The status and note should appear in Latest User Updates within about 5 seconds.
-8. Send a message from User to Admin, then reply from Admin.
+## New behavior
+- Founder sees active Manager profiles dynamically and assigns tasks by Manager UUID.
+- Each Manager sees only tasks assigned to their own login.
+- Manager records attendance for a selected employee, not for themselves.
+- Attendance is keyed by employee + date, so one employee cannot be punched twice for the same date.
+- Managers can add employee records to the shared directory; Founder and other Managers see those same records.
+- Manager approval submissions go to the Founder approval inbox.
+- Founder and Manager can message each other.
+- Pages refresh shared records every five seconds.
+- No dummy data is inserted.
 
-## Important security notes
-- Browser code uses only the Supabase Project URL and Publishable Key.
-- Never put the Supabase service_role or secret key in GitHub or HTML.
-- Supabase Row Level Security is the authority. The UI is not the security boundary.
-- This update uses database tables and RPC functions. It does not create Auth users from the browser. Create employee Auth accounts in Supabase Authentication and assign their profile UUIDs as before.
-- Do not use live company data until you have run both SQL scripts and completed the two-account test above.
-
-## Website verification limitation
-The GitHub repository source can be inspected, but GitHub Pages pages did not return readable page content to the web inspection tool in this session. Therefore the deployed browser experience cannot be confirmed from here. The included test sequence is required after uploading.
+## Verification
+The HTML JavaScript syntax was checked locally. A live end-to-end test still needs to be done after applying the SQL and uploading files, using one Founder account and at least one Manager account.

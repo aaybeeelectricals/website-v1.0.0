@@ -1,7 +1,7 @@
-// AAY BEE Supabase browser configuration. Publishable keys are safe for client use.
-// Database access must still be protected by Supabase Row Level Security.
-window.AAYBEE_SUPABASE_URL = "https://uubrgnpcmzopdhpqhrqf.supabase.co";
-window.AAYBEE_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_K--sq8XcASGp3k0DNeJubg_oXumA1Vo";
+// AAY BEE Supabase browser configuration.
+// Publishable keys are intended for browser use. Never place a service_role/secret key here.
+window.AAYBEE_SUPABASE_URL = "https://iwulgwiiofypdzcnxzgp.supabase.co";
+window.AAYBEE_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_iEK3XM2dzxBkn5vdp9z-8w_qrMKxCW2";
 window.aaybeeSupabase = window.supabase.createClient(
   window.AAYBEE_SUPABASE_URL,
   window.AAYBEE_SUPABASE_PUBLISHABLE_KEY,

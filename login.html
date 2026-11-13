@@ -156,8 +156,39 @@
     }
     @media (max-width: 360px) { .login-panel { padding-inline: 20px; } }
   
-@media (min-width:761px){body{min-height:100dvh;height:100dvh;padding:10px;overflow:hidden}.shell{height:min(680px,calc(100dvh - 20px));min-height:0}.login-panel{padding-top:clamp(18px,3vh,32px);padding-bottom:clamp(16px,2vh,24px)}.login-topline{margin-bottom:clamp(8px,1.5vh,16px)}.intro{margin-bottom:clamp(12px,2.5vh,22px)}.field{margin-bottom:clamp(8px,1.5vh,13px)}}
-@media (max-height:700px) and (min-width:761px){.shell{height:calc(100dvh - 12px)}.login-panel{padding:12px 32px}.login-topline{margin-bottom:6px}.intro{margin-bottom:8px}.field{margin-bottom:6px}}
+/* Keep the sign-in card inside the visible viewport on common laptop screens. */
+body{min-height:100svh;padding:12px}
+.shell{min-height:min(650px,calc(100svh - 24px))}
+.login-panel{padding:clamp(22px,4vh,48px) clamp(24px,4vw,50px)}
+.intro{margin-bottom:clamp(14px,2.5vh,28px)}
+.field{margin-bottom:clamp(10px,1.8vh,17px)}
+.form-row{margin-bottom:clamp(10px,2vh,22px)}
+.copyright{margin-top:clamp(12px,2.5vh,30px)}
+@media(max-height:720px) and (min-width:761px){
+ .shell{min-height:calc(100svh - 20px);height:calc(100svh - 20px)}
+ .brand-panel{padding:22px 30px 20px}
+ .login-panel{padding:18px 32px}
+ .login-content h2{font-size:26px;margin:8px 0 5px}
+ .intro{font-size:11px;line-height:1.4;margin-bottom:12px}
+ .field{margin-bottom:9px}
+ input{height:44px}
+ .form-row{margin:0 0 10px}
+ .submit{height:44px}
+ .copyright{margin-top:10px}
+}
+@media(max-height:650px) and (max-width:760px){
+ body{padding:8px}
+ .shell{min-height:calc(100svh - 16px)}
+ .login-panel{padding:18px 22px}
+ .mobile-brand{margin-bottom:12px}
+ .login-content h2{font-size:24px;margin:6px 0}
+ .intro{margin-bottom:12px;font-size:11px}
+ .field{margin-bottom:9px}
+ input{height:42px}
+ .form-row{margin-bottom:10px}
+ .submit{height:44px}
+ .copyright{margin-top:10px}
+}
 </style>
 </head>
 <body>
